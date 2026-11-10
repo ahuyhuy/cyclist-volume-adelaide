@@ -8,7 +8,7 @@ import overpy
 from typing import Set
 
 
-# Reliable Overpass endpoint (kumi.systems works well)
+# Overpass endpoints, if server times out try a different one
 #OVERPASS_ENDPOINT = "https://overpass.kumi.systems/api/interpreter"
 #OVERPASS_ENDPOINT = "https://overpass-api.de/api/interpreter"
 OVERPASS_ENDPOINT = "https://overpass.private.coffee/api/interpreter"
