@@ -225,6 +225,8 @@ graph_cache/
 *.dbf
 *.prj
 *.gpkg
+*.graphml
+*.qgz
 all-data/
 
 # Bicycling infrastructure classification using OpenStreetMap, Monash University
