@@ -219,6 +219,7 @@ __marimo__/
 
 # Large source data — not tracked in git
 cache/
+graph_cache/
 *.shp
 *.shx
 *.dbf
