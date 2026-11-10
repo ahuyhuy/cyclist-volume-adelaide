@@ -200,6 +200,7 @@ rio-vrt=0.3.1=pyhd8ed1ab_1
 rpds-py=2026.6.3=pypi_0
 scikit-learn=1.9.1=np2py312hda66c2e_1
 scipy=1.18.1=py312h84b0c4e_2
+seaborn=0.13.2=py312hca03da5_4
 send2trash=2.1.0=pypi_0
 setuptools=83.0.0=py312hca03da5_0
 shapely=2.1.2=pypi_0

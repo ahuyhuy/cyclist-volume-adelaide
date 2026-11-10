@@ -229,5 +229,6 @@ graph_cache/
 *.qgz
 all-data/
 
-# Bicycling infrastructure classification using OpenStreetMap, Monash University
+# Not part of the final export
 bicycling-infrastructure-classification/
+investigation/

@@ -13,7 +13,7 @@ beautifulsoup4==4.15.0
 bleach==6.4.0
 branca @ file:///home/conda/feedstock_root/build_artifacts/branca_1759755605562/work
 Brotli @ file:///Users/runner/miniforge3/conda-bld/brotli-split_1792653584797/work
-certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1792763948800/work/certifi
+certifi @ file:///home/task_179300541075950/croot/certifi_1793006633205/work/certifi
 cffi==2.1.1
 charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1786835581063/work
 click @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_click_1788802215/work
@@ -120,6 +120,7 @@ rio-vrt @ file:///home/conda/feedstock_root/build_artifacts/rio-vrt_173489861618
 rpds-py==2026.6.3
 scikit-learn @ file:///Users/runner/miniforge3/conda-bld/bld/rattler-build_scikit-learn_1790072990/work/dist/scikit_learn-1.9.1-cp312-cp312-macosx_11_0_arm64.whl#sha256=6f34bc22df8c2cabd193e42ae8790d838f85c39ceb978f68a9b424b3db03b37a
 scipy @ file:///Users/runner/miniforge3/conda-bld/scipy-split_1792929862007/work/dist/scipy-1.18.1-cp312-cp312-macosx_11_0_arm64.whl#sha256=65a58f99f3613aff364afef303b32b78fc199890ce4eb64387b65dc6daa8690a
+seaborn @ file:///Users/ec2-user/croot/seaborn_1792060042870/work
 Send2Trash==2.1.0
 setuptools==83.0.0
 shapely==2.1.2
