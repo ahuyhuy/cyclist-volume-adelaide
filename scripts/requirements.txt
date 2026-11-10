@@ -1,3 +1,0 @@
-osmnx>=1.0.0
-overpass>=0.5.0
-pandas>=1.0.0
