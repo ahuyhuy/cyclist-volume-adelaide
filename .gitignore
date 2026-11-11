@@ -228,7 +228,3 @@ graph_cache/
 *.graphml
 *.qgz
 all-data/
-
-# Not part of the final export
-bicycling-infrastructure-classification/
-investigation/
