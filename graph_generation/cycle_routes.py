@@ -9,9 +9,9 @@ from typing import Set
 
 
 # Overpass endpoints, if server times out try a different one
-#OVERPASS_ENDPOINT = "https://overpass.kumi.systems/api/interpreter"
-#OVERPASS_ENDPOINT = "https://overpass-api.de/api/interpreter"
-OVERPASS_ENDPOINT = "https://overpass.private.coffee/api/interpreter"
+# OVERPASS_ENDPOINT = "https://overpass.kumi.systems/api/interpreter"
+OVERPASS_ENDPOINT = "https://overpass-api.de/api/interpreter"
+# OVERPASS_ENDPOINT = "https://overpass.private.coffee/api/interpreter"
 
 
 def get_cycle_route_way_ids(bbox: tuple, timeout: int = 180, max_retries: int = 2) -> Set[str]:
