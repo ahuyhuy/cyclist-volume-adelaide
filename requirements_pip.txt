@@ -133,6 +133,7 @@ terminado==0.18.1
 threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_1789547442801/work
 tinycss2==1.5.1
 tornado @ file:///Users/runner/miniforge3/conda-bld/tornado_1789910997880/work
+tqdm @ file:///Users/ec2-user/croot/tqdm_1786970303926/work
 traitlets==5.16.1
 typing_extensions==4.16.0
 tzdata==2026.4
