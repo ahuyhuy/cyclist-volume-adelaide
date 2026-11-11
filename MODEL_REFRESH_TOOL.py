@@ -475,6 +475,58 @@ def write_segment_inputs(out: Path, designs) -> None:
 # Step 6 and 7. Fit per-segment and combined models
 # ---------------------------------------------------------------------------
 
+def fit_capturing_warnings(label: str, fit_fn):
+    """Run a model fit, turning its warnings into the tool's recorded warnings.
+
+    statsmodels and NumPy emit warnings (singular design matrix, divide-by-zero)
+    instead of raising. We capture them so the user sees one clear message rather
+    than raw library output. Returns (model, messages); messages is empty when the
+    fit was clean.
+    """
+    import warnings
+    from statsmodels.tools.sm_exceptions import SingularMatrixWarning
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        model = fit_fn()
+
+    messages = []
+    numeric_problem = False
+    for w in caught:
+        if issubclass(w.category, SingularMatrixWarning):
+            messages.append(
+                f"{label}: design matrix is rank-deficient (predictors are collinear or constant "
+                "within this segment). Coefficients are not uniquely determined."
+            )
+        elif issubclass(w.category, RuntimeWarning):
+            # divide-by-zero / invalid value: a degenerate fit with no residual degrees of freedom.
+            numeric_problem = True
+        else:
+            messages.append(f"{label}: {w.category.__name__}: {w.message}")
+
+    if numeric_problem:
+        messages.append(
+            f"{label}: fit has no residual degrees of freedom, so fit statistics "
+            "(R^2, standard errors, p-values) are invalid. Too few count points for this many predictors."
+        )
+    return model, messages
+
+
+def pause_on_fit_warnings(label: str, messages: list[str]) -> None:
+    """Record fit warnings, then pause for Enter in an interactive terminal."""
+    if not messages:
+        return
+    for msg in messages:
+        warn(msg)
+    if interactive():
+        try:
+            input("    Press Enter to continue anyway, or Ctrl+C to stop... ")
+        except (KeyboardInterrupt, EOFError):
+            raise RefreshError(f"Stopped by user at the {label} fit warning.")
+    else:
+        info("Non-interactive run: continuing with the warnings recorded in run_settings.txt.")
+
+
 def fit_segments(out: Path, designs):
     import statsmodels.api as sm
 
@@ -482,9 +534,11 @@ def fit_segments(out: Path, designs):
     fits = {}
     for seg, (X, y) in designs.items():
         try:
-            model = sm.OLS(y, X).fit(maxiter=500, disp=False)
+            model, messages = fit_capturing_warnings(
+                seg, lambda X=X, y=y: sm.OLS(y, X).fit(maxiter=500, disp=False))
         except Exception as exc:
             raise RefreshError(f"Segment {seg} failed to fit: {exc}") from exc
+        pause_on_fit_warnings(seg, messages)
         (out / "segments" / seg / "regression_summary.txt").write_text(
             model.summary().as_text(), encoding="utf-8")
         fits[seg] = model
@@ -531,9 +585,10 @@ def fit_combined(out: Path, table):
         warn(f"Low residual degrees of freedom ({residual_df}); treat coefficients with caution.")
 
     try:
-        model = sm.OLS(y, X).fit()
+        model, messages = fit_capturing_warnings("Combined", lambda: sm.OLS(y, X).fit())
     except Exception as exc:
         raise RefreshError(f"Combined model failed to fit: {exc}") from exc
+    pause_on_fit_warnings("Combined", messages)
 
     (out / "regression_summary.txt").write_text(model.summary().as_text(), encoding="utf-8")
     info(f"Combined: R^2={model.rsquared:.3f}, n={int(model.nobs)}")
