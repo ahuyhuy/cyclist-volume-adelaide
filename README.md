@@ -91,6 +91,11 @@ The `model_YY_MM_DD_HH_MM.gpkg` output from the model refresh tool can be added 
 
 The graph generation is handled by `graph_generation/GRAPH_SETUP.ipynb` followed by `graph_generation/GRAPH_LOAD.ipynb`. Running these notebooks requires the same conda environment used by the Model Refresh Tool, plus a further download - `all-data` folder from the same link: https://drive.google.com/drive/folders/1tO3klCw9SWAbWICeORm5qa-w-bNdsnZu?usp=sharing
 
+If using VS Code, the following extensions are also required:
+
+- Jupyter https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter
+- Python https://marketplace.visualstudio.com/items?itemName=ms-python.python
+
 Place the folder in this main directory. `all-data/` contains a small library of census data, statistical area data, and count data that the graph notebooks rely on. Run the two notebooks in order to load `graph_generation/graph_cache/` with a refreshed cycle network graph.
 
 ## Handover Notes
